@@ -1,0 +1,145 @@
+
+
+
+<Menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 5, 90
+        spacing: 15
+
+        Label:
+            text: 'Projeto CPF'
+            font_size: 45
+
+        Label:
+            text: ''
+            font_size: 30
+
+        Button:
+            text: '[b]Validar CPF[/b]'
+            on_press: app.root.current = 'validar'
+            background_color: (2, 43, 58, 0.45)
+            font_size: 26
+            markup:True
+
+        Button:
+            text: '[b]Gerador de CPF[/b]'
+            on_press: app.root.current = 'gerar'
+            background_color: (2, 43, 58, 0.45)
+            font_size: 26
+            markup:True
+
+        Button:
+            text: '[b]Sair[/b]'
+            on_press: app.stop()
+            background_color: (2, 43, 58, 0.45)
+            font_size: 26
+            markup:True
+
+<Gerenciador>:
+    Menu:
+        name: 'menu'
+    ValidarCpf:
+        name: 'validar'
+    GerarCpf:
+        name: 'gerar'
+
+
+
+<ValidarCpf>:
+    campo_do_cpf_no_cod_python: cpf_digitado
+    BoxLayout:
+        orientation:'vertical'
+        ActionBar:
+            background_color: (2, 43, 58, 0.45)
+            ActionView:
+                ActionPrevious:
+                    title: 'Validar CPF'
+                    font_size: 26
+                    on_press: resultado.text = 'Aguardando Resultado'
+                    on_press: cpf_digitado.text = ''
+                    on_press: app.root.current = 'menu'
+        ScrollView:
+            BoxLayout:
+                id:box
+                orientation:'vertical'
+                size_hint_y:None
+                height:self.minimum_height
+        Label:
+            text: 'Digite o CPF:'
+            font_size: 26
+            size_hint: 1 , .30
+        TextInput:
+            id: cpf_digitado
+            text: ''
+            size_hint: 1 , .30
+            font_size: 26
+            padding_x:
+                [self.center[0] - self._get_text_width(max(self._lines, key=len), self.tab_width, self._label_cached) / 2.0,
+                0] if self.text else [self.center[0], 0]
+            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+        Label:
+            id: resultado
+            text: 'Aguardando Resultado'
+            font_size: 26
+            size_hint: 1 , .50
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 5
+            Button:
+                id: validar
+                text: 'Validar CPF'
+                background_color: (2, 43, 58, 0.45)
+                size_hint: 1, None
+                on_press: resultado.text = root.chamaValidador()
+                font_size: 26
+
+
+
+<GerarCpf>:
+    campo_da_quantidade: cpf_quantidade
+    BoxLayout:
+        orientation:'vertical'
+        ActionBar:
+            background_color: (2, 43, 58, 0.45)
+            ActionView:
+                ActionPrevious:
+                    title: 'Gerador de CPF'
+                    on_press: app.root.current = 'menu'
+                    on_press: cpf_gerado.text = 'Aguardando'
+        ScrollView:
+            BoxLayout:
+                id:box
+                orientation:'vertical'
+                size_hint_y:None
+                height:self.minimum_height
+        Label:
+            font_size: 26
+            text: 'Gerador:'
+            size_hint: 1 , .30
+        ScrollView:
+            TextInput:
+                id: cpf_gerado
+                text: 'Aguardando'
+                size_hint_y: None
+                height: self.minimum_height
+                font_size: 26
+                padding_x:
+                    [self.center[0] - self._get_text_width(max(self._lines, key=len), self.tab_width, self._label_cached) / 2.0,
+                    0] if self.text else [self.center[0], 0]
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 5
+            Button:
+                on_press: cpf_gerado.text = root.chamaGerador()
+                text: 'Gerar CPF'
+                background_color: (2, 43, 58, 0.45)
+                size_hint: 1, None
+                font_size: 26
+            TextInput:
+                text: '1'
+                size_hint: 0.25, None
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                id: cpf_quantidade
+                font_size: 26
