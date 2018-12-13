@@ -15,3 +15,5 @@
 
 <div align="center"><h2>Resultado</h2></div>
 <p align=justify>&emsp;&emsp;&emsp;Os objetivos estabelecidos para a aplicação foram cumpridos com sucesso, e as figuras que virão a seguir irão detalhar o funcionamento.  </p>
+
+<div align="left"><h3>Figuras</h2></div>
